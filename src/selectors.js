@@ -5,4 +5,15 @@ function useCatalog() {
   return useSelector(state => Object.values(state.catalog), shallowEqual);
 }
 
-export { useCatalog };
+function useProduct(id) {
+  return useSelector(state => {
+    if (state.catalog.hasOwnProperty(id)) return state.catalog[id];
+    return null;
+  }, shallowEqual);
+}
+
+function useCart() {
+  return useSelector(state => Object.values(state.cart), shallowEqual);
+}
+
+export { useCatalog, useProduct, useCart };

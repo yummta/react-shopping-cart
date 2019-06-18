@@ -3,27 +3,27 @@ const initialState = {
   catalog: {
     p1: {
       id: "p1",
-      title: "Product 1",
+      name: "Product 1",
       price: 1
     },
     p2: {
       id: "p2",
-      title: "Product 2",
+      name: "Product 2",
       price: 2
     },
     p3: {
       id: "p3",
-      title: "Product 3",
+      name: "Product 3",
       price: 3
     },
     p4: {
       id: "p4",
-      title: "Product 4",
+      name: "Product 4",
       price: 4
     },
     p5: {
       id: "p5",
-      title: "Product 5",
+      name: "Product 5",
       price: 5
     }
   }

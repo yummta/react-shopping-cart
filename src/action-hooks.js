@@ -10,7 +10,9 @@ import {
 
 export function useAddProduct() {
   const dispatch = useDispatch();
-  return React.useCallback(id => dispatch(addProduct(id)), [dispatch]);
+  return React.useCallback(product => dispatch(addProduct(product)), [
+    dispatch
+  ]);
 }
 
 export function useRemoveProduct() {
