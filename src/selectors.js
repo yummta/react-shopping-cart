@@ -16,4 +16,8 @@ function useCart() {
   return useSelector(state => Object.values(state.cart), shallowEqual);
 }
 
-export { useCatalog, useProduct, useCart };
+function useTotalCart() {
+  return useSelector(state => state.totalCart, shallowEqual);
+}
+
+export { useCatalog, useProduct, useCart, useTotalCart };

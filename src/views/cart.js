@@ -1,14 +1,21 @@
 /** @jsx jsx */
+import { jsx } from "@emotion/core";
 import React from "react";
 import { useCart } from "./../selectors";
-import { useIncreaseProduct, useDecreaseProduct } from "./../action-hooks";
-import { jsx } from "@emotion/core";
+import { useTotalCart } from "./../selectors";
+import {
+  useIncreaseProduct,
+  useDecreaseProduct,
+  useRemoveProduct
+} from "./../action-hooks";
 
 function Cart() {
   const [action, setAction] = React.useState("");
   const cart = useCart();
+  const totalCart = useTotalCart();
   const increaseProduct = useIncreaseProduct();
   const decreaseProduct = useDecreaseProduct();
+  const removeProduct = useRemoveProduct();
 
   function handleClick(e) {
     setAction(e.target.dataset.action);
@@ -23,6 +30,9 @@ function Cart() {
         break;
       case "decrease":
         decreaseProduct(idProduct);
+        break;
+      case "remove":
+        removeProduct(idProduct);
         break;
       default:
         break;
@@ -50,13 +60,20 @@ function Cart() {
             <React.Fragment key={product.id}>
               <tr>
                 <td>
-                  <b>{product.name}</b>
                   <div
-                    css={{ display: "flex", justifyContent: "space-between" }}
+                    css={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center"
+                    }}
                   >
                     <div>
-                      <span>${product.price}</span>
+                      <b>{product.name}</b>
+                      <div>
+                        <span>${product.price}</span>
+                      </div>
                     </div>
+
                     <form onSubmit={handleSubmit}>
                       <input
                         type="hidden"
@@ -67,21 +84,28 @@ function Cart() {
                         -
                       </button>
                       <span>{product.cant}</span>
-                      <button onClick={handleClick} data-action="increase">
+                      <button
+                        onClick={handleClick}
+                        data-action="increase"
+                        css={{ marginRight: 16 }}
+                      >
                         +
+                      </button>
+                      <button onClick={handleClick} data-action="remove">
+                        Remove
                       </button>
                     </form>
                   </div>
                 </td>
-                <td>9</td>
+                <td css={{ textAlign: "right" }}>{product.subtotal}</td>
               </tr>
             </React.Fragment>
           ))}
         </tbody>
-        <tfoot>
+        <tfoot css={{ textAlign: "right" }}>
           <tr>
             <td>Total</td>
-            <td>$999</td>
+            <td>${totalCart}</td>
           </tr>
         </tfoot>
       </table>

@@ -1,6 +1,5 @@
 function addProduct(product) {
-  const updateProduct = { ...product, cant: 1 };
-  return { type: "ADD_PRODUCT", payload: updateProduct };
+  return { type: "ADD_PRODUCT", payload: product };
 }
 
 function removeProduct(id) {
